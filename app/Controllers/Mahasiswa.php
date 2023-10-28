@@ -6,9 +6,11 @@ use App\Models\MahasiswaModel;
 
 class Mahasiswa extends BaseController {
     protected $mahasiswamodel;
+    protected $session;
 
     public function __construct() {
         $this->mahasiswamodel = new MahasiswaModel();
+        $this->session = \Config\Services::session();
     }
 
     public function index() {
@@ -37,6 +39,7 @@ class Mahasiswa extends BaseController {
             'no_hp'     => $this->request->getVar('no_hp')
         ]);
 
+        $this->session->setFlashdata('success', 'Data berhasil disimpan!');
         return redirect()->to('mahasiswa');
     }
 
@@ -59,11 +62,13 @@ class Mahasiswa extends BaseController {
             'no_hp'     => $this->request->getVar('no_hp')
         ];
 
+        $this->session->setFlashdata('success', 'Data berhasil disimpan!');
         $this->mahasiswamodel->update_data($data, $id_mhs);
         return redirect()->to('mahasiswa');
     }
 
     public function delete($id_mhs) {
+        $this->session->setFlashdata('success', 'Data berhasil dihapus!');
         $this->mahasiswamodel->delete_data($id_mhs);
         return redirect()->to('mahasiswa');
     }

@@ -6,9 +6,11 @@ use App\Models\MatakuliahModel;
 
 class Matakuliah extends BaseController {
     protected $matakuliahmodel;
+    protected $session;
 
     public function __construct() {
         $this->matakuliahmodel = new MatakuliahModel();
+        $this->session = \Config\Services::session();
     }
 
     public function index() {
@@ -38,6 +40,7 @@ class Matakuliah extends BaseController {
             'ruangan'   => $this->request->getVar('ruangan')
     ]);
 
+        $this->session->setFlashdata('success', 'Data berhasil disimpan!');
         return redirect()->to('matakuliah');
     }
 
@@ -60,11 +63,13 @@ class Matakuliah extends BaseController {
             'ruangan'   => $this->request->getVar('ruangan')
         ];
 
+        $this->session->setFlashdata('success', 'Data berhasil disimpan!');
         $this->matakuliahmodel->update_data($data, $id_mk);
         return redirect()->to('matakuliah');
     }
 
     public function delete($id_mk) {
+        $this->session->setFlashdata('success', 'Data berhasil dihapus!');
         $this->matakuliahmodel->delete_data($id_mk);
         return redirect()->to('matakuliah');
     }

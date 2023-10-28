@@ -26,8 +26,9 @@
                     <label class="form-label">Ruangan</label>
                     <input type="text" name="ruangan" class="form-control" value="<?= $matakuliah['ruangan']; ?>">
                 </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Update</button>
+                <div class="col-12 d-flex flex-row justify-content-end">
+                    <button type="submit" class="btn btn-primary mx-2">Update</button>
+                    <a type="button" class="btn btn-secondary flex-end" href="javascript: window.history.back()">Kembali</a>
                 </div>
             </form>
         </div>
