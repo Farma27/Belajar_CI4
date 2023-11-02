@@ -7,10 +7,12 @@ use App\Models\MatakuliahModel;
 class Matakuliah extends BaseController {
     protected $matakuliahmodel;
     protected $session;
+    protected $validator;
 
     public function __construct() {
         $this->matakuliahmodel = new MatakuliahModel();
         $this->session = \Config\Services::session();
+        $this->validator = \Config\Services::validation();
     }
 
     public function index() {
@@ -32,13 +34,48 @@ class Matakuliah extends BaseController {
     }
 
     public function simpan() {
-        $this->matakuliahmodel->save([
-            'id'        => $this->request->getVar('id'),
-            'kode_mk'   => $this->request->getVar('kode_mk'),
-            'nama_mk'   => $this->request->getVar('nama_mk'),
-            'sks'       => $this->request->getVar('sks'),
-            'ruangan'   => $this->request->getVar('ruangan')
-    ]);
+        if (!$this->validate([
+            'kode_mk' => [
+                'rules' => 'required|min_length[3]|max_length[9]|is_unique[tbl_matakuliah.kode_mk]',
+                'label' => 'Kode Mata Kuliah',
+                'errors' => [
+                    'required' => '{field} harus diisi!',
+                    'is_unique' => '({value}) sudah terdaftar!'
+                ]
+            ],
+            'nama_mk' => [
+                'rules' => 'required',
+                'label' => 'Nama Mata Kuliah',
+                'errors' => [
+                    'required' => '{field} harus diisi!'
+                ]
+            ],
+            'sks' => [
+                'rules' => 'required|min_length[1]|max_length[2]',
+                'label' => 'SKS',
+                'errors' => [
+                    'required' => '{field} harus diisi!'
+                ]
+            ],
+            'ruangan' => [
+                'rules' => 'required',
+                'label' => 'Ruangan',
+                'errors' => [
+                    'required' => '{field} harus diisi!'
+                ]
+            ]
+        ])) {
+            $this->session->setFlashdata('err', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        } else {
+            $this->matakuliahmodel->save([
+                'id'        => $this->request->getVar('id'),
+                'kode_mk'   => $this->request->getVar('kode_mk'),
+                'nama_mk'   => $this->request->getVar('nama_mk'),
+                'sks'       => $this->request->getVar('sks'),
+                'ruangan'   => $this->request->getVar('ruangan')
+            ]);
+        }
 
         $this->session->setFlashdata('success', 'Data berhasil disimpan!');
         return redirect()->to('matakuliah');

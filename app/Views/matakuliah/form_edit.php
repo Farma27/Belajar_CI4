@@ -8,7 +8,16 @@
             <b><?= $title ?></b>
         </div>
         <div class="card-body">
+            <?php if (!empty(session()->getFlashdata('err'))) : ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <h4>Error!</h4>
+                    </hr />
+                    <?php echo session()->getFlashdata('err'); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
             <form action="<?php echo base_url('matakuliah/update') ?>" class="row g-3" method="post">
+                <?= csrf_field(); ?>
                 <div class="col-6">
                     <input type="hidden" name="id" value="<?= $matakuliah['id']; ?>">
                     <label class="form-label">Kode Mata Kuliah</label>
@@ -28,7 +37,7 @@
                 </div>
                 <div class="col-12 d-flex flex-row justify-content-end">
                     <button type="submit" class="btn btn-primary mx-2">Update</button>
-                    <a type="button" class="btn btn-secondary flex-end" href="javascript: window.history.back()">Kembali</a>
+                    <a type="button" class="btn btn-secondary flex-end" href="<?= base_url('matakuliah') ?>">Kembali</a>
                 </div>
             </form>
         </div>

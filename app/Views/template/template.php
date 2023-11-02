@@ -17,8 +17,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link active" aria-current="page">Home</a>
+                    <li class="nav-item d-flex column">
+                        <a href="#" class="nav-link">Home</a>
+                        <a href="<?= base_url('mahasiswa'); ?>" class="nav-link">Mahasiswa</a>
+                        <a href="<?= base_url('matakuliah'); ?>" class="nav-link">Matakuliah</a>
                     </li>
                 </ul>
             </div>
