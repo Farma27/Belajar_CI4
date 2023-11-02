@@ -29,7 +29,7 @@
                     <td><?php echo $key['sks']; ?></td>
                     <td><?php echo $key['ruangan']; ?></td>
                     <td>
-                        <a href="/matakuliah/edit/<?php echo $key['id']; ?>">Edit</a>
+                        <a href="/matakuliah/edit/<?php echo $key['id']; ?>">Edit</a> | 
                         <a href="#" data-bs-toggle="modal" data-bs-target="#modalHapus<?= $key['id'] ?>">Hapus</a>
                         <div class="modal fade" id="modalHapus<?= $key['id'] ?>" tabindex="-1" aria-labelledby="labelModalHapus" aria-hidden="true">
                             <div class="modal-dialog">
