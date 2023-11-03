@@ -19,19 +19,19 @@
                 <?= csrf_field(); ?>
                 <div class="col-6">
                     <label class="form-label">Kode Mata Kuliah</label>
-                    <input type="text" name="kode_mk" class="form-control" value="<?= old('kode_mk') ?>">
+                    <input type="text" name="kode_mk" class="form-control" value="<?= old('kode_mk') ?>" required>
                 </div>
                 <div class="col-6">
                     <label class="form-label">Nama Mata Kuliah</label>
-                    <input type="text" name="nama_mk" class="form-control" value="<?= old('nama_mk') ?>">
+                    <input type="text" name="nama_mk" class="form-control" value="<?= old('nama_mk') ?>" required>
                 </div>
                 <div class="col-6">
                     <label class="form-label">SKS</label>
-                    <input type="number" name="sks" class="form-control" value="<?= old('sks') ?>">
+                    <input type="number" name="sks" class="form-control" value="<?= old('sks') ?>" required>
                 </div>
                 <div class="col-6">
                     <label class="form-label">Ruangan</label>
-                    <input type="text" name="ruangan" class="form-control" value="<?= old('ruangan') ?>">
+                    <input type="text" name="ruangan" class="form-control" value="<?= old('ruangan') ?>" required>
                 </div>
                 <div class="col-12 d-flex flex-row justify-content-end">
                     <button type="submit" class="btn btn-primary mx-2">Simpan</button>

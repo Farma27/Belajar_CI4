@@ -40,7 +40,9 @@ class Matakuliah extends BaseController {
                 'label' => 'Kode Mata Kuliah',
                 'errors' => [
                     'required' => '{field} harus diisi!',
-                    'is_unique' => '({value}) sudah terdaftar!'
+                    'min_length' => '{field} harus terdiri dari 3~9 karakter!',
+                    'max_length' => '{field} harus terdiri dari 3~9 karakter!',
+                    'is_unique' => '{field} {value} sudah terdaftar!'
                 ]
             ],
             'nama_mk' => [
@@ -54,7 +56,9 @@ class Matakuliah extends BaseController {
                 'rules' => 'required|min_length[1]|max_length[2]',
                 'label' => 'SKS',
                 'errors' => [
-                    'required' => '{field} harus diisi!'
+                    'required' => '{field} harus diisi!',
+                    'min_length' => '{field} harus terdiri dari 1~2 karakter!',
+                    'max_length' => '{field} harus terdiri dari 1~2 karakter!'
                 ]
             ],
             'ruangan' => [
@@ -100,8 +104,51 @@ class Matakuliah extends BaseController {
             'ruangan'   => $this->request->getVar('ruangan')
         ];
 
+        if (!$this->validate([
+            'id' => [
+                'rules' => 'is_natural_no_zero'
+            ],
+            'kode_mk' => [
+                'rules' => 'required|min_length[3]|max_length[9]|is_unique[tbl_matakuliah.kode_mk,id,{id}]',
+                'label' => 'Kode Mata Kuliah',
+                'errors' => [
+                    'required' => '{field} harus diisi!',
+                    'min_length' => '{field} harus terdiri dari 3~9 karakter!',
+                    'max_length' => '{field} harus terdiri dari 3~9 karakter!',
+                    'is_unique' => '{field} {value} sudah terdaftar!'
+                ]
+            ],
+            'nama_mk' => [
+                'rules' => 'required',
+                'label' => 'Nama Mata Kuliah',
+                'errors' => [
+                    'required' => '{field} harus diisi!'
+                ]
+            ],
+            'sks' => [
+                'rules' => 'required|min_length[1]|max_length[2]',
+                'label' => 'SKS',
+                'errors' => [
+                    'required' => '{field} harus diisi!',
+                    'min_length' => '{field} harus terdiri dari 1~2 karakter!',
+                    'max_length' => '{field} harus terdiri dari 1~2 karakter!'
+                ]
+            ],
+            'ruangan' => [
+                'rules' => 'required',
+                'label' => 'Ruangan',
+                'errors' => [
+                    'required' => '{field} harus diisi!'
+                ]
+            ]
+        ])) {
+            $this->session->setFlashdata('err', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        } else {
+            $this->matakuliahmodel->update_data($data, $id_mk);
+        }
+
         $this->session->setFlashdata('success', 'Data berhasil disimpan!');
-        $this->matakuliahmodel->update_data($data, $id_mk);
         return redirect()->to('matakuliah');
     }
 

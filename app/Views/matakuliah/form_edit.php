@@ -21,19 +21,19 @@
                 <div class="col-6">
                     <input type="hidden" name="id" value="<?= $matakuliah['id']; ?>">
                     <label class="form-label">Kode Mata Kuliah</label>
-                    <input type="text" name="kode_mk" class="form-control" value="<?= $matakuliah['kode_mk']; ?>">
+                    <input type="text" name="kode_mk" class="form-control" value="<?= $matakuliah['kode_mk']; ?>" required>
                 </div>
                 <div class="col-6">
                     <label class="form-label">Nama Mata Kuliah</label>
-                    <input type="text" name="nama_mk" class="form-control" value="<?= $matakuliah['nama_mk']; ?>">
+                    <input type="text" name="nama_mk" class="form-control" value="<?= $matakuliah['nama_mk']; ?>" required>
                 </div>
                 <div class="col-6">
                     <label class="form-label">SKS</label>
-                    <input type="text" name="sks" class="form-control" value="<?= $matakuliah['sks']; ?>">
+                    <input type="text" name="sks" class="form-control" value="<?= $matakuliah['sks']; ?>" required>
                 </div>
                 <div class="col-6">
                     <label class="form-label">Ruangan</label>
-                    <input type="text" name="ruangan" class="form-control" value="<?= $matakuliah['ruangan']; ?>">
+                    <input type="text" name="ruangan" class="form-control" value="<?= $matakuliah['ruangan']; ?>" required>
                 </div>
                 <div class="col-12 d-flex flex-row justify-content-end">
                     <button type="submit" class="btn btn-primary mx-2">Update</button>
