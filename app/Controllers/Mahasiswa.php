@@ -140,7 +140,7 @@ class Mahasiswa extends BaseController {
             $this->session->setFlashdata('err', $this->validator->listErrors());
             return redirect()->back()->withInput();
         } else {
-        $this->mahasiswamodel->update_data($data, $id_mhs);
+            $this->mahasiswamodel->update_data($data, $id_mhs);
         }
 
         $this->session->setFlashdata('success', 'Data berhasil disimpan!');
